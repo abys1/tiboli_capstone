@@ -100,14 +100,6 @@ $user_id = $_SESSION['user_id'];
                     </div>
                     <!-- end page title -->
 
-                    <!-- Add button to open the modal -->
-                    <div class="row">
-                        <div class="col-12">
-                            <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal"
-                                data-bs-target="#addQuizModal">Add Quiz</button>
-                        </div>
-                    </div>
-
                     <!-- Modal for adding a new quiz assignment -->
                     <div class="modal fade" id="addQuizModal" tabindex="-1" aria-labelledby="addQuizModalLabel"
                         aria-hidden="true">
@@ -129,34 +121,6 @@ $user_id = $_SESSION['user_id'];
                                             <label for="pointsPerItem" class="form-label">Points per Item</label>
                                             <input type="text" class="form-control" id="pointsPerItem"
                                                 name="pointsPerItem">
-                                        </div>
-                                        <div class="mb-3">
-                                            <label for="inputState" class="form-label">Select Lesson</label>
-                                            <select id="inputState" class="form-select" name="lesson">
-                                                <option selected disabled>Select a lesson</option>
-                                                <!-- Default option -->
-                                                <?php
-                            include 'dbcon.php';
-
-                            $sql = "SELECT tbl_lesson.lesson_id, tbl_lesson.name, tbl_lesson.type, tbl_lesson.level, tbl_lesson_files.status FROM tbl_lesson
-                                    JOIN tbl_lesson_files ON tbl_lesson.lesson_id = tbl_lesson_files.lesson_files_id
-                                    WHERE tbl_lesson_files.status = 1";
-
-                            $result = mysqli_query($conn, $sql);
-
-                            if (mysqli_num_rows($result) > 0) {
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    $lesson_id = $row['lesson_id'];
-                                    $name = $row['name'];
-                                    $type = $row['type'];
-                                    $level = $row['level'];
-                                    echo "<option value='$lesson_id'>$type: $level - $name</option>";
-                                }
-                            } else {
-                                echo "<option value='' disabled>No lessons available</option>";
-                            }
-                            ?>
-                                            </select>
                                         </div>
                                     </form>
                                 </div>
@@ -213,39 +177,45 @@ $user_id = $_SESSION['user_id'];
                                                 <tr>
                                                     <th>ID</th>
                                                     <th>Title</th>
-                                                    <th>Lesson Objectives</th>
-                                                    <th>Level of Learning</th>
-                                                    <th>Lesson</th>
+                                                    <th>Instructions</th>
+                                                    <th>Date Start</th>
+                                                    <th>Due</th>
+                                                    <th>Added By</th>
+                                                    <th>Max Score</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <!-- Replace the following rows with data from your database -->
-                                                <tr>
-                                                    <td>1</td>
-                                                    <td>Quiz 1</td>
-                                                    <td>10</td>
-                                                    <td>5</td>
-                                                    <td>Literacy</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-success btn-sm">Manage</a>
+                                            <?php
+                                            include 'dbcon.php';
+
+                                            $quiz = "SELECT tbl_quiz_options.quiz_options_id, tbl_userinfo.firstname, tbl_userinfo.lastname, tbl_quiz_options.title, tbl_quiz_options.max_score, tbl_quiz_options.date_start, tbl_quiz_options.due, tbl_quiz_options.instructions 
+                                            FROM tbl_quiz_options
+                                            JOIN tbl_userinfo ON tbl_quiz_options.added_by = tbl_userinfo.user_id";
+
+                                            $result = mysqli_query($conn, $quiz);
+
+                                            if(mysqli_num_rows($result) > 0) {
+                                                while($row = mysqli_fetch_assoc($result)) {
+                                                    ?>
+                                                    <tr>
+                                                        <td><?php echo $row['quiz_options_id']; ?></td>
+                                                        <td><?php echo $row['title']; ?></td>
+                                                        <td><?php echo $row['instructions']; ?></td>
+                                                        <td><?php echo $row['date_start']; ?></td>
+                                                        <td><?php echo $row['due']; ?></td>
+                                                        <td><?php echo $row['firstname'] . $row['lastname']; ?></td>
+                                                        <td><?php echo $row['max_score']; ?></td>
+                                                        <td>
+                                                        <a href="teacher_create_quiz_multic.php?quiz_options_id=<?php echo $row['quiz_options_id']; ?>" class="btn btn-success btn-sm">Manage</a>
                                                         <a href="#" class="btn btn-primary btn-sm">Edit</a>
                                                         <a href="#" class="btn btn-danger btn-sm">Archive</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>2</td>
-                                                    <td>Quiz 2</td>
-                                                    <td>15</td>
-                                                    <td>3</td>
-                                                    <td>Numeracy</td>
-                                                    <td>
-                                                        <a href="#" class="btn btn-success btn-sm">Manage</a>
-                                                        <a href="#" class="btn btn-primary btn-sm">Edit</a>
-                                                        <a href="#" class="btn btn-danger btn-sm">Archive</a>
-                                                    </td>
-                                                </tr>
-                                                <!-- End of database-generated rows -->
+                                                        </td>
+                                                    </tr>
+                                                    <?php
+                                                }
+                                            }
+                                            ?>
                                             </tbody>
                                         </table>
                                     </div>

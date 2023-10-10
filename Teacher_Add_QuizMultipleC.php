@@ -226,163 +226,18 @@ $user_id = $_SESSION['user_id'];
                         <div class="row justify-content-md-center mt-4">
                             <div class="card col-sm-11">
                                 <div class="card-body">
-                                    <div class="question-list">
-                                        <div class="question-container mb-4">
-                                            <label>Question #1</label>
-                                            <textarea class="form-control mb-3" name="question[]" cols="130" rows="5"
-                                                placeholder="Enter your Questions here" required></textarea>
-                                            <table class="table table-hover">
-                                                <tbody>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="form-check form-check-inline">
-                                                                <input type="radio" id="customRadio1a"
-                                                                    name="choices[0][correct]" class="form-check-input"
-                                                                    value="a">
-                                                                <label class="form-check-label"
-                                                                    for="customRadio1a">a</label>
-                                                            </div>
-                                                            <div>
-                                                                <input type="text" class="form-control"
-                                                                    name="choices[0][a]" required>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="form-check form-check-inline">
-                                                                <input type="radio" id="customRadio1b"
-                                                                    name="choices[0][correct]" class="form-check-input"
-                                                                    value="b">
-                                                                <label class="form-check-label"
-                                                                    for="customRadio1b">b</label>
-                                                            </div>
-                                                            <div>
-                                                                <input type="text" class="form-control"
-                                                                    name="choices[0][b]" required>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="form-check form-check-inline">
-                                                                <input type="radio" id="customRadio1c"
-                                                                    name="choices[0][correct]" class="form-check-input"
-                                                                    value="c">
-                                                                <label class="form-check-label"
-                                                                    for="customRadio1c">c</label>
-                                                            </div>
-                                                            <div>
-                                                                <input type="text" class="form-control"
-                                                                    name="choices[0][c]" required>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="form-check form-check-inline">
-                                                                <input type="radio" id="customRadio1d"
-                                                                    name="choices[0][correct]" class="form-check-input"
-                                                                    value="d">
-                                                                <label class="form-check-label"
-                                                                    for="customRadio1d">d</label>
-                                                            </div>
-                                                            <div>
-                                                                <input type="text" class="form-control"
-                                                                    name="choices[0][d]" required>
-                                                            </div>
-                                                        </td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
                                     <div class="row mt-4">
-                                        <div class="col-sm-6">
-                                            <input type="submit" class="btn btn-primary" value="Create Quiz"
-                                                name="createquiz">
-                                        </div>
-                                        <div class="col-sm-6 text-sm-end">
-                                            <input type="button" class="btn btn-primary add-question-btn"
-                                                value="Add Question" name="addquestion">
+                                        <div class="col-sm-6 offset-sm-3 text-center">
+                                            <input type="submit" class="btn btn-primary" value="Create Quiz" name="createquiz">
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                </div>
+                    </div>
                 </form>
             </div>
         </div>
-
-        <script>
-            $(document).ready(function () {
-                const addQuestionBtn = document.querySelector('.add-question-btn');
-                const questionList = document.querySelector('.question-list');
-                let questionNumber = 2; // Starting question number
-
-                addQuestionBtn.addEventListener('click', function () {
-                    const questionContainer = document.createElement('div');
-                    questionContainer.classList.add('question-container', 'mb-2');
-                    questionContainer.innerHTML = `
-                    <label>Question #${questionNumber}</label>
-                    <textarea class="form-control mb-3" name="question[]" cols="130" rows="5" placeholder="Enter your Questions here" required></textarea>
-                    <table class="table table-hover">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" id="customRadio${questionNumber}a" name="choices[${questionNumber - 1}][correct]" class="form-check-input" value="a">
-                                        <label class="form-check-label" for="customRadio${questionNumber}a">a</label>
-                                    </div>
-                                    <div>
-                                        <input type="text" class="form-control" name="choices[${questionNumber - 1}][a]" required>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" id="customRadio${questionNumber}b" name="choices[${questionNumber - 1}][correct]" class="form-check-input" value="b">
-                                        <label class="form-check-label" for="customRadio${questionNumber}b">b</label>
-                                    </div>
-                                    <div>
-                                        <input type="text" class="form-control" name="choices[${questionNumber - 1}][b]" required>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" id="customRadio${questionNumber}c" name="choices[${questionNumber - 1}][correct]" class="form-check-input" value="c">
-                                        <label class="form-check-label" for="customRadio${questionNumber}c">c</label>
-                                    </div>
-                                    <div>
-                                        <input type="text" class="form-control" name="choices[${questionNumber - 1}][c]" required>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="form-check form-check-inline">
-                                        <input type="radio" id="customRadio${questionNumber}d" name="choices[${questionNumber - 1}][correct]" class="form-check-input" value="d">
-                                        <label class="form-check-label" for="customRadio${questionNumber}d">d</label>
-                                    </div>
-                                    <div>
-                                        <input type="text" class="form-control" name="choices[${questionNumber - 1}][d]" required>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                `;
-
-                    questionList.appendChild(questionContainer);
-                    questionNumber++;
-                });
-            });
-        </script>
-
 
         <script>
             $(document).ready(function () {
@@ -404,36 +259,7 @@ $user_id = $_SESSION['user_id'];
     </div> <!-- end col-->
     </div>
     <!-- end row-->
-
-
-
-
-    <!-- Footer Start -->
-    <!-- <footer class="footer">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-6">
-                    <script>document.write(new Date().getFullYear())</script> © Hyper - Coderthemes.com
-                </div>
-                <div class="col-md-6">
-                    <div class="text-md-end footer-links d-none d-md-block">
-                        <a href="javascript: void(0);">About</a>
-                        <a href="javascript: void(0);">Support</a>
-                        <a href="javascript: void(0);">Contact Us</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer> -->
-    <!-- end Footer -->
-
     </div>
-
-    <!-- ============================================================== -->
-    <!-- End Page content -->
-    <!-- ============================================================== -->
-
-
     </div>
     <!-- END wrapper -->
     <script>
