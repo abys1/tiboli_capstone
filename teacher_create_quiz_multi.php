@@ -2,13 +2,14 @@
 include 'dbcon.php';
 
 if (isset($_POST['createquiz'])) {
+    $quiz_options_id = $_GET['quiz_options_id'];
     $questions = $_POST['question'];
     $choices = $_POST['choices'];
     $correctChoices = $_POST['correct_choice'];
 
     // Insert questions into tbl_quiz_question
     foreach ($questions as $index => $question) {
-        $query = "INSERT INTO tbl_quiz_question (quiz_options_id, question) VALUES ('', '$question')";
+        $query = "INSERT INTO tbl_quiz_question (quiz_options_id, question) VALUES ('$quiz_options_id', '$question')";
         $result = mysqli_query($conn, $query);
 
         if ($result) {

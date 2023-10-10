@@ -152,16 +152,16 @@ $user_id = $_SESSION['user_id'];
                                         include 'dbcon.php';
 
                                         $sql = "SELECT tbl_userinfo.user_id, tbl_learner.learner_id, tbl_learner.level_id, tbl_user_level.level, tbl_userinfo.firstname,
-                  tbl_userinfo.middlename, tbl_userinfo.lastname, tbl_userinfo.birthday, tbl_userinfo.gender, tbl_user_status.status,
-                  tbl_learner_id.lrn, tbl_address.address, tbl_usercredentials.contact, tbl_usercredentials.email
-                  FROM tbl_learner
-                  JOIN tbl_user_level ON tbl_learner.level_id = tbl_user_level.level_id
-                  JOIN tbl_userinfo ON tbl_learner.user_id = tbl_userinfo.user_id
-                  JOIN tbl_learner_id ON tbl_learner.learner_id = tbl_learner_id.learner_id
-                  JOIN tbl_user_status ON tbl_learner.status_id = tbl_user_status.status_id
-                  JOIN tbl_address ON tbl_learner.address_id = tbl_address.address_id
-                  JOIN tbl_usercredentials ON tbl_learner.usercredentials_id = tbl_usercredentials.usercredentials_id
-                  WHERE tbl_user_level.level = 'LEARNER' AND tbl_user_status.status = 1";
+                                        tbl_userinfo.middlename, tbl_userinfo.lastname, tbl_userinfo.birthday, tbl_userinfo.gender, tbl_user_status.status,
+                                        tbl_learner_id.lrn, tbl_address.address, tbl_usercredentials.contact, tbl_usercredentials.email
+                                        FROM tbl_learner
+                                        JOIN tbl_user_level ON tbl_learner.level_id = tbl_user_level.level_id
+                                        JOIN tbl_userinfo ON tbl_learner.user_id = tbl_userinfo.user_id
+                                        JOIN tbl_learner_id ON tbl_learner.learner_id = tbl_learner_id.learner_id
+                                        JOIN tbl_user_status ON tbl_learner.status_id = tbl_user_status.status_id
+                                        JOIN tbl_address ON tbl_learner.address_id = tbl_address.address_id
+                                        JOIN tbl_usercredentials ON tbl_learner.usercredentials_id = tbl_usercredentials.usercredentials_id
+                                        WHERE tbl_user_level.level = 'LEARNER' AND tbl_user_status.status = 1";
 
                                         $result = mysqli_query($conn, $sql);
 
